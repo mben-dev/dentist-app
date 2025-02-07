@@ -1,11 +1,10 @@
 import type LoginController from '#controllers/login_controller'
 import { LoginForm } from '@/components/login-form'
 import type { InferPageProps } from '@adonisjs/inertia/types'
-import { router, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { useState } from 'react'
 
 export default function UserIndex(_props: InferPageProps<LoginController, 'show'>) {
-  const { user } = usePage<any>().props
   const [errors, setErrors] = useState<string | null>(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
