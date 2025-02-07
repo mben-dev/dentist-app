@@ -3,9 +3,12 @@ import type { NextFn } from '@adonisjs/core/types/http'
 
 export default class SessionMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
-    const user = await ctx.auth.authenticate()
+    if (await ctx.auth.isAuthenticated) {
+      const user = await ctx.auth.authenticate()
 
-    user && ctx.inertia.share({ user })
+      user && ctx.inertia.share({ user })
+    }
+
     return next()
   }
 }

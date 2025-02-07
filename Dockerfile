@@ -22,6 +22,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 RUN node ace build
+RUN node ace migration:run --force
+RUN node ace db:seed
 
 # Production stage
 FROM base
