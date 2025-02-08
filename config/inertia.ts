@@ -1,4 +1,3 @@
-import { HttpContext } from '@adonisjs/core/http'
 import { defineConfig } from '@adonisjs/inertia'
 import type { InferSharedProps, PageProps } from '@adonisjs/inertia/types'
 
@@ -6,9 +5,7 @@ const inertiaConfig = defineConfig({
   /**
    * Path to the Edge view that will be used as the root view for Inertia responses
    */
-  rootView: ({ auth }: HttpContext) => {
-    if (auth?.user) return 'layout_user'
-
+  rootView: () => {
     return 'inertia_layout'
   },
 
