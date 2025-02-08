@@ -9,8 +9,9 @@ export default class LoginController {
     const user = await User.verifyCredentials(email, password)
 
     await auth.use('web').login(user)
+    console.log('user logged in')
 
-    response.redirect(user.role === 'admin' ? '/admin/users' : '/dashboard')
+    response.redirect().toRoute(user.role === 'admin' ? 'admin:users' : 'dashboard')
   }
   async show({ inertia, auth }: HttpContext) {
     if (auth.isAuthenticated) {

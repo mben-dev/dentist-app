@@ -13,7 +13,11 @@ import router from '@adonisjs/core/services/router'
 router.on('/').renderInertia('home')
 const UsersController = () => import('#controllers/users_controller')
 
-router.get('/admin/users', [UsersController, 'index']).use(middleware.auth()).use(middleware.auth())
+router
+  .get('/admin/users', [UsersController, 'index'])
+  .use(middleware.auth())
+  .use(middleware.auth())
+  .as('admin:users')
 
 router
   .group(() => {
