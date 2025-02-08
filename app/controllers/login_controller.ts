@@ -4,14 +4,17 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class LoginController {
   async store({ request, response, auth }: HttpContext) {
-    const { email, password } = await request.validateUsing(store)
+    try {
+      const { email, password } = await request.validateUsing(store)
 
-    const user = await User.verifyCredentials(email, password)
+      const user = await User.verifyCredentials(email, password)
 
-    await auth.use('web').login(user)
-    console.log('user logged in')
+      await auth.use('web').login(user)
 
-    response.redirect().toRoute(user.role === 'admin' ? 'admin:users' : 'dashboard')
+      response.redirect().toRoute(user.role === 'admin' ? 'admin:users' : 'dashboard')
+    } catch (error) {
+      console.error(error)
+    }
   }
   async show({ inertia, auth }: HttpContext) {
     if (auth.isAuthenticated) {
