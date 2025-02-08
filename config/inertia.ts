@@ -7,7 +7,7 @@ const inertiaConfig = defineConfig({
    * Path to the Edge view that will be used as the root view for Inertia responses
    */
   rootView: ({ auth }: HttpContext) => {
-    if (auth.user) return 'layout_user'
+    if (auth?.user) return 'layout_user'
 
     return 'inertia_layout'
   },
