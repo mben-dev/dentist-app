@@ -1,7 +1,7 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { JSX, ReactNode } from 'react'
 import ReactDOMServer from 'react-dom/server'
-import Layout from '../layout'
+import Layout from './layout.js'
 
 type PageType = {
   default: {
@@ -13,7 +13,7 @@ export default function render(page: any) {
   return createInertiaApp({
     page,
     render: ReactDOMServer.renderToString,
-    resolve: (name) => {
+    resolve: (name: string) => {
       const pages = import.meta.glob('../pages/**/*.tsx', { eager: true })
       const resolvedPage = pages[`../pages/${name}.tsx`] as PageType
 
@@ -21,6 +21,6 @@ export default function render(page: any) {
         resolvedPage.default.layout || ((page: ReactNode) => <Layout children={page} />)
       return resolvedPage
     },
-    setup: ({ App, props }) => <App {...props} />,
+    setup: ({ App, props }: { App: React.ComponentType; props: any }) => <App {...props} />,
   })
 }

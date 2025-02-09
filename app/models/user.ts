@@ -1,4 +1,3 @@
-import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { compose } from '@adonisjs/core/helpers'
 import hash from '@adonisjs/core/services/hash'
@@ -20,6 +19,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare email: string
 
+  @column()
+  declare isActive: boolean
+
   @column({ serializeAs: null })
   declare password: string
 
@@ -31,6 +33,4 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-
-  static accessTokens = DbAccessTokensProvider.forModel(User)
 }

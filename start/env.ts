@@ -17,6 +17,10 @@ export default await Env.create(new URL('../', import.meta.url), {
   APP_KEY: Env.schema.string(),
   HOST: Env.schema.string({ format: 'host' }),
   LOG_LEVEL: Env.schema.string(),
+  APP_URL: Env.schema.string(),
+  APP_NAME: Env.schema.string(),
+  APP_LOGO: Env.schema.string(),
+  FROM_EMAIL: Env.schema.string(),
 
   /*
   |----------------------------------------------------------
@@ -36,4 +40,14 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_PASSWORD: Env.schema.string.optional(),
   DB_DATABASE: Env.schema.string(),
   DB_SSL: Env.schema.boolean(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the mail package
+  |----------------------------------------------------------
+  */
+  SMTP_HOST: Env.schema.string(),
+  SMTP_PORT: Env.schema.string(),
+  SMTP_AUTH_USER: Env.schema.string(),
+  SMTP_AUTH_PASS: Env.schema.string(),
 })

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils.js'
 import { Link, usePage } from '@inertiajs/react'
 
 export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {

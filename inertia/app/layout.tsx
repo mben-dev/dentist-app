@@ -1,10 +1,12 @@
-import { MainNav } from '@/components/main-nav'
-import { UserNav } from '@/components/user-nav'
+// import env from '#start/env'
+import { MainNav } from '@/components/main-nav.js'
+import { UserNav } from '@/components/user-nav.js'
 import { usePage } from '@inertiajs/react'
+import React from 'react'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const {
-    props: { user },
+    props: { user, logo },
     url,
   } = usePage<any>()
   const noLayoutRoute = ['/', '/auth', '/auth/login', '/auth/register']
@@ -16,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {user && (
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
-            <img src="https://img.logoipsum.com/244.svg" alt="logo" />
+            <img src={logo} alt="logo" />
             <div className="ml-auto flex items-center space-x-4">
               <MainNav className="mx-6" />
 

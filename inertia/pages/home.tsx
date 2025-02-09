@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button.js'
 import { Head, Link } from '@inertiajs/react'
 
 export default function Home() {

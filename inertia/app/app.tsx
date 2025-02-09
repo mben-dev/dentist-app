@@ -6,8 +6,9 @@ import { createInertiaApp } from '@inertiajs/react'
 import { JSX, ReactNode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import '../css/app.css'
-import Layout from '../layout'
+import Layout from './layout.js'
 
+// Utiliser directement import.meta.env pour les variables d'environnement côté client
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
 type PageType = {
@@ -19,9 +20,9 @@ type PageType = {
 createInertiaApp({
   progress: { color: '#5468FF' },
 
-  title: (title) => `${title} - ${appName}`,
+  title: (title: string) => `${title} - ${appName}`,
 
-  resolve: async (name) => {
+  resolve: async (name: string) => {
     const page = (await resolvePageComponent(
       `../pages/${name}.tsx`,
       import.meta.glob('../pages/**/*.tsx')
@@ -32,7 +33,7 @@ createInertiaApp({
     return page
   },
 
-  setup({ el, App, props }) {
+  setup({ el, App, props }: { el: HTMLElement; App: (props: any) => JSX.Element; props: any }) {
     hydrateRoot(el, <App {...props} />)
   },
 })
