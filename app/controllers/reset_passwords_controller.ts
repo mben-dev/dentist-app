@@ -1,7 +1,7 @@
+import { ForgotPasswordTemplate } from '#mails/forgot_password'
 import Token from '#models/token'
 import User from '#models/user'
 import env from '#start/env'
-import ForgotPasswordTemplate from '#templates/forgot_password'
 import { forgotPassword, handleResetPassword, resetPassword } from '#validators/forgot_password'
 import stringHelpers from '@adonisjs/core/helpers/string'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -99,8 +99,12 @@ export default class ResetPasswordsController {
       session.flash('error', 'Compte inexistant')
       response.redirect().toRoute('auth:forgot-password')
     }
+    if (!user?.isActive && !user?.password) {
+      await user?.merge({ password, isActive: true }).save()
+    } else {
+      await user?.merge({ password }).save()
+    }
     await tokenObj?.merge({ isUsed: true }).save()
-    await user?.merge({ password }).save()
 
     session.flash('success', 'Mot de passe modifié avec succès')
     response.redirect().toRoute('auth:login')

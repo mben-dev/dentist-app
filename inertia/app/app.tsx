@@ -6,9 +6,8 @@ import { createInertiaApp } from '@inertiajs/react'
 import { JSX, ReactNode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import '../css/app.css'
-import Layout from './layout.js'
+import Layout from './layout'
 
-// Utiliser directement import.meta.env pour les variables d'environnement côté client
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
 type PageType = {

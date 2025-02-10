@@ -10,6 +10,7 @@
 const LoginController = () => import('#controllers/login_controller')
 const LogoutsController = () => import('#controllers/logouts_controller')
 const ResetPasswordsController = () => import('#controllers/reset_passwords_controller')
+const AsksController = () => import('#controllers/asks_controller')
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 router.on('/').renderInertia('home')
@@ -24,6 +25,7 @@ router
       .group(() => {
         router.get('/', [UsersController, 'index']).as('admin:users')
         router.get('/create', [UsersController, 'createUser']).as('admin:users-create')
+        router.post('/create', [UsersController, 'store'])
       })
       .prefix('/users')
   })
@@ -49,3 +51,13 @@ router
   .use(middleware.guest())
 
 router.post('/auth/logout', [LogoutsController, 'handle']).use(middleware.auth())
+
+router
+  .group(() => {
+    router.get('/', [AsksController, 'index']).as('asks')
+    router.get('/create', [AsksController, 'createAsk']).as('asks:create')
+    router.post('/create', [AsksController, 'store'])
+    router.get('/:id', [AsksController, 'show']).as('asks:show')
+  })
+  .prefix('/asks')
+  .use(middleware.auth())

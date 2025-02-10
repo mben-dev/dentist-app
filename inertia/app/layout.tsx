@@ -1,6 +1,5 @@
-// import env from '#start/env'
-import { MainNav } from '@/components/main-nav.js'
-import { UserNav } from '@/components/user-nav.js'
+import { MainNav } from '@/components/main-nav'
+import { UserNav } from '@/components/user-nav'
 import { usePage } from '@inertiajs/react'
 import React from 'react'
 

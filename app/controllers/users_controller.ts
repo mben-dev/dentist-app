@@ -1,7 +1,7 @@
+import InviteUserTemplate from '#mails/invite_user'
 import Token from '#models/token'
 import User from '#models/user'
 import env from '#start/env'
-import ForgotPasswordTemplate from '#templates/forgot_password'
 import { store } from '#validators/user'
 import stringHelpers from '@adonisjs/core/helpers/string'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -13,11 +13,11 @@ export default class UsersController {
   async index({ inertia }: HttpContext) {
     // const page = request.input('page', 1)
     const users = await User.query()
-    return inertia.render('users/index', { users })
+    return inertia.render('admin/users/index', { users }, { title: 'Utilisateurs' })
   }
 
   createUser({ inertia }: HttpContext) {
-    return inertia.render('users/create-user/index', {}, { title: 'Créer un utilisateur' })
+    return inertia.render('admin/users/create-user/index', {}, { title: 'Créer un utilisateur' })
   }
 
   async store({ request, response, session }: HttpContext) {
@@ -32,7 +32,7 @@ export default class UsersController {
       email,
       expiresAt: DateTime.now().plus({ minutes: 20 }),
     })
-    const template = await render(ForgotPasswordTemplate({ url: url }))
+    const template = await render(InviteUserTemplate({ url: url }))
 
     await mail.send(async (message) => {
       message

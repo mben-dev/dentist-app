@@ -1,7 +1,7 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { JSX, ReactNode } from 'react'
 import ReactDOMServer from 'react-dom/server'
-import Layout from './layout.js'
+import Layout from './layout'
 
 type PageType = {
   default: {
@@ -21,6 +21,6 @@ export default function render(page: any) {
         resolvedPage.default.layout || ((page: ReactNode) => <Layout children={page} />)
       return resolvedPage
     },
-    setup: ({ App, props }: { App: React.ComponentType; props: any }) => <App {...props} />,
+    setup: ({ App, props }) => <App {...props} />,
   })
 }

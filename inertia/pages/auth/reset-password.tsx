@@ -1,8 +1,8 @@
 import ResetPasswordsController from '#controllers/reset_passwords_controller'
-import { ResetPasswordForm } from '@/components/reset-password-form.js'
+import { ResetPasswordForm } from '@/components/reset-password-form'
 import type { InferPageProps } from '@adonisjs/inertia/types'
 import { router, usePage } from '@inertiajs/react'
-import LayoutAuth from './layout.js'
+import LayoutAuth from './layout'
 
 export default function UserIndex({
   token,
@@ -12,7 +12,6 @@ export default function UserIndex({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // @ts-expect-error
     const formData = new FormData(e.currentTarget)
 
     const data = {

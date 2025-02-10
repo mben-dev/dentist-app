@@ -1,8 +1,8 @@
 // import env from '#start/env'
-import { usePage } from '@inertiajs/react'
+import usePageProps from '@/hooks/use_page_props'
 
 export default function LayoutAuth({ children }: { children: React.ReactNode }) {
-  const { props } = usePage<any>()
+  const props = usePageProps<{ logo: string; exceptions?: any; messages?: any }>()
 
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
