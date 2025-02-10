@@ -13,7 +13,7 @@ export default class LoginController {
 
     await auth.use('web').login(user)
 
-    response.redirect().toRoute(user.role === 'admin' ? 'admin:users' : 'dashboard')
+    response.redirect().toRoute(user.role === 'admin' ? 'admin:users' : 'asks')
   }
   async show({ inertia }: HttpContext) {
     return inertia.render('auth/login')
